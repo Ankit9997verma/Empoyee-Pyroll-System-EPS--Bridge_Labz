@@ -1,42 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Employee Payroll</title>
+
+    <!-- External CSS file connect -->
     <link rel="stylesheet" href="/style.css">
-    <title>Employee Dashboard</title>
+
+    <!-- Bootstrap icons ke liye CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
+
 <body>
 
-<h2>Employee Payroll Dashboard</h2>
+<!-- ===== Top Header Section ===== -->
+<header class="topbar">
 
-<a href="/add">Add Employee</a>
+    <!-- Logo + Title -->
+    <div class="logo">
+        <i class="bi bi-person-circle"></i>
+        <h2>Employee Payroll</h2>
+    </div>
 
-<table>
+</header>
+
+
+<!-- ===== Main Container ===== -->
+<div class="container">
+
+    <!-- Heading + Add button ek hi line me -->
+ <div class="section-header">
+    <h2>Employee Details</h2>
+
+    <div class="header-actions">
+
+        <!-- Search Form -->
+        <form action="/" method="GET" class="search-form">
+            <input 
+                type="text" 
+                name="search" 
+                placeholder="Search by name..."
+                value="<%= typeof search !== 'undefined' ? search : '' %>"
+            >
+            <button type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+        </form>
+
+        <!-- Add User Button -->
+        <a href="/add" class="btn-add">
+            <i class="bi bi-plus-lg"></i> Add User
+        </a>
+
+    </div>
+</div>
+
+
+
+    <!-- ===== Stats Cards Section ===== -->
+    <div class="stats">
+
+        <!-- Total Employees count -->
+        <div class="card">
+            <i class="bi bi-people-fill"></i>
+            <h4>Total Employees</h4>
+            <p><%= employees.length %></p>
+        </div>
+
+        <!-- Unique department count -->
+        <div class="card">
+            <i class="bi bi-bank"></i>
+            <h4>Departments</h4>
+            <p>
+                <%= [...new Set(employees.map(emp => emp.department))].length %>
+            </p>
+        </div>
+
+        <!-- Total salary calculation -->
+        <div class="card">
+            <i class="bi bi-coin"></i>
+            <h4>Total Salary</h4>
+            <p>
+                ₹<%= employees.reduce((sum, e) => sum + e.salary, 0) %>
+            </p>
+        </div>
+
+        <!-- Total tax (10%) -->
+        <div class="card">
+            <i class="bi bi-file-ruled-fill"></i>
+            <h4>Total Tax (10%)</h4>
+            <p>
+                ₹<%= employees.reduce((sum, e) => sum + (e.salary * 0.10), 0).toFixed(2) %>
+            </p>
+        </div>
+
+        <!-- Net salary after tax -->
+        <div class="card green">
+            <i class="bi bi-cash-coin"></i>
+            <h4>Total Net Salary</h4>
+            <p>
+                ₹<%= employees.reduce((sum, e) => sum + (e.salary * 0.90), 0).toFixed(2) %>
+            </p>
+        </div>
+
+        <!-- Average salary -->
+        <div class="card purple">
+            <i class="bi bi-graph-up-arrow"></i>
+            <h4>Average Salary</h4>
+            <p>
+                ₹ <%= averageSalary %>
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- ===== Employee Table ===== -->
+    <table>
+
     <tr>
         <th>Name</th>
         <th>Department</th>
-        <th>Basic Salary</th>
-        <th>Tax (12%)</th>
-        <th>Net Salary</th>
+        <th>Salary</th>
         <th>Actions</th>
     </tr>
 
-    <% employees.forEach(emp => { 
-        const tax = emp.salary * 0.12;
-        const net = emp.salary - tax;
-    %>
-        <tr>
-            <td><%= emp.name %></td>
-            <td><%= emp.department %></td>
-            <td><%= emp.salary %></td>
-            <td><%= tax %></td>
-            <td><%= net %></td>
-            <td>
-                <a href="/edit/<%= emp.id %>">Edit</a>
-                <a href="/delete/<%= emp.id %>">Delete</a>
-            </td>
-        </tr>
+    <% employees.forEach(emp => { %>
+
+    <tr>
+
+        <!-- Profile + Name -->
+        <td class="user-cell">
+            <img 
+                src="/images/<%= emp.profile ? emp.profile : 'avatar1.jpeg' %>" 
+                class="avatar"
+            >
+            <span><%= emp.name %></span>
+        </td>
+
+        <td><%= emp.department %></td>
+        <td>₹<%= emp.salary %></td>
+
+        <td>
+            <a href="/edit/<%= emp.id %>" class="edit">
+                <i class="bi bi-pencil-square"></i>
+            </a>
+
+            <a href="/delete/<%= emp.id %>" class="delete">
+                <i class="bi bi-trash"></i>
+            </a>
+        </td>
+
+    </tr>
+
     <% }) %>
-</table>
+
+    </table>
+
+
+</div>
 
 </body>
 </html>

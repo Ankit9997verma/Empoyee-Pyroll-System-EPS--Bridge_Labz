@@ -1,0 +1,121 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employee</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ===== Top Header ===== -->
+<header class="topbar">
+    <div class="logo">
+        <i class="bi bi-pencil-square"></i>
+        <h2>Edit Employee</h2>
+    </div>
+</header>
+
+
+<!-- ===== Edit Form ===== -->
+<div class="form-container">
+
+    <h2>Update Employee Details</h2>
+
+    <form action="/edit/<%= employee.id %>" method="POST">
+
+        <!-- Name -->
+        <label>Name</label>
+        <input 
+            type="text" 
+            name="name" 
+            value="<%= employee.name %>" 
+            required
+        >
+
+        <!-- Department -->
+        <label>Department</label>
+        <input 
+            type="text" 
+            name="department" 
+            value="<%= employee.department %>" 
+            required
+        >
+
+        <!-- Salary -->
+        <label>Salary</label>
+        <input 
+            type="number" 
+            name="salary" 
+            value="<%= employee.salary %>" 
+            required
+        >
+
+        <!-- Gender -->
+        <label>Gender</label>
+        <select name="gender">
+            <option value="Male" <%= employee.gender === 'Male' ? 'selected' : '' %>>Male</option>
+            <option value="Female" <%= employee.gender === 'Female' ? 'selected' : '' %>>Female</option>
+        </select>
+
+        <!-- ===== Avatar Selection ===== -->
+        <label style="margin-top:10px;">Choose Profile Image</label>
+
+        <div class="avatar-select">
+
+            <label>
+                <input 
+                    type="radio" 
+                    name="profile" 
+                    value="avatar1.jpeg"
+                    <%= employee.profile === 'avatar1.jpeg' ? 'checked' : '' %>
+                >
+                <img src="/images/avatar1.jpeg">
+            </label>
+
+            <label>
+                <input 
+                    type="radio" 
+                    name="profile" 
+                    value="avatar2.jpeg"
+                    <%= employee.profile === 'avatar2.jpeg' ? 'checked' : '' %>
+                >
+                <img src="/images/avatar2.jpeg">
+            </label>
+
+            <label>
+                <input 
+                    type="radio" 
+                    name="profile" 
+                    value="avatar3.jpeg"
+                    <%= employee.profile === 'avatar3.jpeg' ? 'checked' : '' %>
+                >
+                <img src="/images/avatar3.jpeg">
+            </label>
+
+        </div>
+
+        <!-- Submit -->
+        <button type="submit">
+            <i class="bi bi-check-circle"></i> Update Employee
+        </button>
+
+    </form>
+
+    <!-- Back button -->
+    <div style="margin-top:15px;">
+        <a href="/" class="btn-add">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

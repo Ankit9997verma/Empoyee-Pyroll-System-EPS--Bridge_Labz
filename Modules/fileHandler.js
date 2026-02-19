@@ -1,20 +1,31 @@
-const fs = require('fs').promises;
+const { log } = require('console');
+const fs  = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname, '../employees.json');
-async function read() {
+
+const filePath = path.join(__dirname, '..', '..' ,"employees.json");
+
+
+function readFile() {
     try {
-        const data = await fs.readFile(filePath, 'utf-8');
+        const data = fs.readFileSync(filePath, 'utf-8');
         return JSON.parse(data);
     } catch (err) {
-        console.error("Read Error:", err);
+        console.error("Error reading file:", err);
         return [];
-    }
+    }   
 }
-async function write(data) {
+
+function writeFile(data) {
     try {
-        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+        fs.writeFileSync   (filePath, JSON.stringify(data, null, 2), 'utf-8');
     } catch (err) {
-        console.error("Write Error:", err);
+        console.error("Error writing file:", err);
     }
 }
-module.exports = { read, write };
+
+module.exports = {
+    readFile,
+    writeFile
+};  
+
+

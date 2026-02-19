@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Employee</title>
+
+    <!-- CSS connect -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ===== Top Header ===== -->
+<header class="topbar">
+    <div class="logo">
+        <i class="bi bi-person-plus-fill"></i>
+        <h2>Add Employee</h2>
+    </div>
+</header>
+
+
+<!-- ===== Form Container ===== -->
+<div class="form-container">
+
+    <h2>Employee Payroll Form</h2>
+
+    <!-- Form data POST hoga /add route pe -->
+    <form action="/add" method="POST">
+
+        <!-- ===== Name ===== -->
+        <label>Name</label>
+        <input 
+            type="text" 
+            name="name" 
+            placeholder="Enter employee name" 
+            required
+        >
+
+        <!-- ===== Department ===== -->
+        <label>Department</label>
+        <input 
+            type="text" 
+            name="department" 
+            placeholder="Enter department"
+            required
+        >
+
+        <!-- ===== Salary ===== -->
+        <label>Salary</label>
+        <input 
+            type="number" 
+            name="salary" 
+            placeholder="Enter salary amount"
+            required
+        >
+
+        <!-- ===== Gender ===== -->
+        <label>Gender</label>
+        <select name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <!-- ===== Profile Image Selection ===== -->
+        <label>Choose Profile Image</label>
+
+        <div class="avatar-select">
+
+            <label>
+                <input type="radio" name="profile" value="avatar1.jpeg" checked>
+                <img src="/images/avatar1.jpeg" alt="Avatar 1">
+            </label>
+
+            <label>
+                <input type="radio" name="profile" value="avatar2.jpeg">
+                <img src="/images/avatar2.jpeg" alt="Avatar 2">
+            </label>
+
+            <label>
+                <input type="radio" name="profile" value="avatar3.jpeg">
+                <img src="/images/avatar3.jpeg" alt="Avatar 3">
+            </label>
+
+        </div>
+
+        <!-- ===== Submit Button ===== -->
+        <button type="submit">
+            <i class="bi bi-check-circle"></i> Add Employee
+        </button>
+
+    </form>
+
+    <!-- ===== Back to Dashboard ===== -->
+    <div style="margin-top:15px;">
+        <a href="/" class="btn-add">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
